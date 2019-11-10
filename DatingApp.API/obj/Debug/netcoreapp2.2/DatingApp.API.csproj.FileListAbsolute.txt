@@ -1,0 +1,16 @@
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/appsettings.Development.json
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/appsettings.json
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/Properties/launchSettings.json
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/DatingApp.API.deps.json
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/DatingApp.API.runtimeconfig.json
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/DatingApp.API.runtimeconfig.dev.json
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/DatingApp.API.dll
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/DatingApp.API.pdb
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.csprojAssemblyReference.cache
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.RazorAssemblyInfo.cache
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.RazorAssemblyInfo.cs
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.AssemblyInfoInputs.cache
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.AssemblyInfo.cs
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.RazorTargetAssemblyInfo.cache
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.dll
+/home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.pdb
