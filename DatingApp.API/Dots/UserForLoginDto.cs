@@ -8,7 +8,7 @@ namespace DatingApp.API.Dots
         public string Username { get; set; }
 
         [Required]
-        [StringLength(8,MinimumLength=4,ErrorMessage="You must spacify password between 4 to 8")] 
+        [StringLength(8,MinimumLength=4,ErrorMessage="User Name or Password Not right")] 
         public string Password { get; set; }
     }
 }

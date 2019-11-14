@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
-//using DatingApp.API.Helper;
+using DatingApp.API.Helper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -73,7 +73,7 @@ namespace DatingApp.API
                         var error = context.Features.Get<IExceptionHandlerFeature>();
                         if(error != null)
                         {
-                            //context.Response.AddApplictionError(error.Error.Message);//this line of code from Helper File Not useful in core2.2
+                            context.Response.AddApplictionError(error.Error.Message);//this line of code from Helper File Not useful in core2.2
                             await context.Response.WriteAsync(error.Error.Message);
                         }
                     });
