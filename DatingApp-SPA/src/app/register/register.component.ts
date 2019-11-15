@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -10,16 +13,20 @@ import { AuthService } from '../_services/auth.service';
 export class RegisterComponent implements OnInit {
 @Output() cancelRegister = new EventEmitter();
 model: any = {};
-  constructor( private authService: AuthService ) { }
+  constructor( private authService: AuthService, private alertify: AlertifyService, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
 
   register() {
     this.authService.register(this.model).subscribe(() => {
-      console.log('Registeration Sucsseffly');
+    this.toastr.success('ALERT: Registeration Sucsseffly', 'success');
+      // this.alertify.success(':ALERT: Registeration Sucsseffly');
+      // console.log('Registeration Sucsseffly');
     }, error => {
-      console.log(error);
+      this.toastr.error('password or user Name have problem', 'Error');
+      // this.alertify.error(error);
+      // console.log(error);
     }
     );
 
@@ -28,6 +35,6 @@ model: any = {};
 
   cancel() {
     this.cancelRegister.emit(false);
-    console.log('Canceld');
+    // console.log('Canceld');
   }
 }
