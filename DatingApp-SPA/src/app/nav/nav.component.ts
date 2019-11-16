@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class NavComponent implements OnInit {
 model: any = {};
 
-  constructor(public authService: AuthService, private alertify: AlertifyService, private toastr: ToastrService) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService,
+              private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,6 +28,8 @@ model: any = {};
       // this.alertify.error(error);
       // console.log(error);
       // console.log('Faulier');
+    }, () => {
+      this.router.navigate(['/members']);
     });
   }
 
@@ -39,6 +43,7 @@ model: any = {};
     localStorage.removeItem('token');
     this.toastr.info('LogOut', '');
     // this.alertify.message(':ALRET: Logout');
+    this.router.navigate(['/home']);
     // console.log('logout');
   }
 }
