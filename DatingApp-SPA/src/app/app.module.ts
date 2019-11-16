@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
@@ -31,7 +31,8 @@ import { AlertifyService } from './_services/alertify.service';
       BrowserAnimationsModule, // required animations module
       ToastrModule.forRoot({
          positionClass: 'toast-bottom-right'
-      }) // ToastrModule added
+      }), // ToastrModule added
+      BsDropdownModule.forRoot()
    ],
    providers: [
       AuthService,
