@@ -38,7 +38,11 @@ namespace DatingApp.API
             services.AddDbContext<DataContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
      
      
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddJsonOptions(opt=> {
+                opt.SerializerSettings.ReferenceLoopHandling= 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddCors();// عشان يسمح بتداول الدومين تاع ال (أي بي أي ) مع الانجلوار
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository,AuthRepository>();//للتعامل مع المستودع 
