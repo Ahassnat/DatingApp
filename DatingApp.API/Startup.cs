@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Helper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -44,6 +45,7 @@ namespace DatingApp.API
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();// عشان يسمح بتداول الدومين تاع ال (أي بي أي ) مع الانجلوار
+            services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository,AuthRepository>();//للتعامل مع المستودع 
             services.AddScoped<IDatingRepository,DatingRepository>();
