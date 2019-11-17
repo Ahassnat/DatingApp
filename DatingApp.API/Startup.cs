@@ -42,7 +42,7 @@ namespace DatingApp.API
             services.AddCors();// عشان يسمح بتداول الدومين تاع ال (أي بي أي ) مع الانجلوار
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository,AuthRepository>();//للتعامل مع المستودع 
-            
+            services.AddScoped<IDatingRepository,DatingRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   .AddJwtBearer(options=>{
                       options.TokenValidationParameters = new TokenValidationParameters
