@@ -14,3 +14,4 @@
 /home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.RazorTargetAssemblyInfo.cache
 /home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.dll
 /home/abood/DatingApp/DatingApp.API/obj/Debug/netcoreapp2.2/DatingApp.API.pdb
+/home/abood/DatingApp/DatingApp.API/bin/Debug/netcoreapp2.2/Data/UserSeedData.json

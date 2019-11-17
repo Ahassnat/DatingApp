@@ -40,6 +40,7 @@ namespace DatingApp.API
      
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors();// عشان يسمح بتداول الدومين تاع ال (أي بي أي ) مع الانجلوار
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository,AuthRepository>();//للتعامل مع المستودع 
             
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -56,7 +57,7 @@ namespace DatingApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -82,6 +83,7 @@ namespace DatingApp.API
             }
 
             //app.UseHttpsRedirection();
+            // seeder.SeedUsers(); function used for one time to update data base then we ignore it , if we didnt ignorant the function its will repeate ever time we luncj our project and add the same data again and again in our DB
             app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();
