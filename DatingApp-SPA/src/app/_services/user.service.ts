@@ -22,10 +22,12 @@ export class UserService {
 
 constructor(private http: HttpClient) { }
 
+// this function implemnt in MemberListComponant
 getUsers(): Observable<User[]> {
   return this.http.get<User[]>(this.baseUrl + 'users');
 }
 
+// this function implemnt in MemberDetailComponant
 getUser(id): Observable<User> {
   return this.http.get<User>(this.baseUrl + 'users/' + id);
 }
