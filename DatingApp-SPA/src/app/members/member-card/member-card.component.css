@@ -11,4 +11,22 @@
 }
 .card-img-wrapper{
     overflow: hidden;
+    position: relative;
+}
+.member-icon{
+    position: relative;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+}
+.card-img-wrapper:hover .member-icon{
+    bottom: 0;
+    opacity: 1;
+}
+
+.animate{
+    transition: all 0.3s ease-in-out;
 }
