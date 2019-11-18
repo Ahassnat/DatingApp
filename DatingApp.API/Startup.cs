@@ -43,7 +43,7 @@ namespace DatingApp.API
             .AddJsonOptions(opt=> {
                 opt.SerializerSettings.ReferenceLoopHandling= 
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            });// this service for ignoring the postman test proplem
             services.AddCors();// عشان يسمح بتداول الدومين تاع ال (أي بي أي ) مع الانجلوار
             services.AddAutoMapper();
             services.AddTransient<Seed>();
