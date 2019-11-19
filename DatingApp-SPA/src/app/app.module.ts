@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
@@ -56,6 +57,7 @@ export function tokenGetter() {
       }), // ToastrModule added
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
+      NgxGalleryModule,
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {
