@@ -11,19 +11,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MemberDetailComponent implements OnInit {
   user: User;
-  constructor(private userService: UserService, private toastr: ToastrService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private toastr: ToastrService,
+            private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadUser();
+    this.route.data.subscribe(data => {
+      this.user = data['user'];
+    });
+    // this.loadUser();
   }
 
 // the route => member/3
-loadUser() {// added + to change the type of data from string to int
-  this.userService.getUser(+this.route.snapshot.params['id'])
-      .subscribe((user: User) => {
-        this.user = user;
-      }, error => {
-        error.toastr.error('', 'Error');
-      });
-}
+// loadUser() {// added + to change the type of data from string to int
+//   this.userService.getUser(+this.route.snapshot.params['id'])
+//       .subscribe((user: User) => {
+//         this.user = user;
+//       }, error => {
+//         error.toastr.error('', 'Error');
+//       });
+// }
 }
