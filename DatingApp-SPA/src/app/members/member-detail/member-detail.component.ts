@@ -23,7 +23,7 @@ loadUser() {// added + to change the type of data from string to int
       .subscribe((user: User) => {
         this.user = user;
       }, error => {
-        error.toastr.error(error);
+        error.toastr.error('', 'Error');
       });
 }
 }
