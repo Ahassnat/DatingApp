@@ -3,6 +3,8 @@ import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+import { UserService } from 'src/app/_services/user.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-member-edit',
@@ -19,7 +21,8 @@ unloadNotification($event: any) {
     $event.returnValue = true;
   }
 }
-  constructor(private router: ActivatedRoute, private toaster: ToastrService) { }
+  constructor(private router: ActivatedRoute, private toaster: ToastrService,
+    private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
     this.router.data.subscribe(data => {
@@ -28,9 +31,13 @@ unloadNotification($event: any) {
   }
 
   updateUser() {
-    console.log(this.user);
-    this.toaster.success('Profile Updated Successfully', 'Success');
+    this.userService.updateUser(this.authService.decodedToken.nameid,  this.user).subscribe(next => {
+      this.toaster.success('Profile Updated Successfully', 'Success');
     this.editForm.reset(this.user); // reset the user data afte make changes
+    }, error => {
+      this.toaster.error('Something Error', 'ERROR');
+    });
+    console.log(this.user);
   }
 
 }
