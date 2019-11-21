@@ -27,7 +27,7 @@ unloadNotification($event: any) {
     });
   }
 
-  udateUser() {
+  updateUser() {
     console.log(this.user);
     this.toaster.success('Profile Updated Successfully', 'Success');
     this.editForm.reset(this.user); // reset the user data afte make changes
