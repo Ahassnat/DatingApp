@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 namespace DatingApp.API.Controllers
 {
     [Authorize]
-    [Route("api/users/{userId/photos}")]
+    [Route("api/users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase
     {
@@ -54,7 +54,8 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId,PhotoForCreationDto photoForCreationDto)
+                                                    //we user [FromForm] becuse we use it in the post man 
+        public async Task<IActionResult> AddPhotoForUser(int userId,[FromForm]PhotoForCreationDto photoForCreationDto)
         {   
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -78,25 +79,25 @@ namespace DatingApp.API.Controllers
 
                     uploadResulet = _cloudinay.Upload(uploadParams);
                 }
-
-                photoForCreationDto.Url = uploadResulet.Uri.ToString();
-                photoForCreationDto.PublicId = uploadResulet.PublicId;
-
-                var photo = _mapper.Map<Photo>(photoForCreationDto);
-
-                if(!userFromRepo.Photos.Any(u => u.IsMain))
-                    photo.IsMain = true;
-                
-                userFromRepo.Photos.Add(photo);
-
-                if(await _repo.SaveAll())
-                {
-                    var photoToReturn =_mapper.Map<PhotoForReturnDto>(photo);
-                    return CreatedAtRoute("GetPhoto",new{id = photo.Id}, photoToReturn);
-                }
-
-                return BadRequest("Could not add the Photo");
             }
+            photoForCreationDto.Url = uploadResulet.Uri.ToString();
+            photoForCreationDto.PublicId = uploadResulet.PublicId;
+
+            var photo = _mapper.Map<Photo>(photoForCreationDto);
+
+            if(!userFromRepo.Photos.Any(u => u.IsMain))
+                photo.IsMain = true;
+                
+            userFromRepo.Photos.Add(photo);
+
+            if(await _repo.SaveAll())
+            {
+                var photoToReturn =_mapper.Map<PhotoForReturnDto>(photo);
+                return CreatedAtRoute("GetPhoto",new {id = photo.Id}, photoToReturn);
+            }
+
+                
+            return BadRequest("Could not add the Photo");
 
         }
 }
