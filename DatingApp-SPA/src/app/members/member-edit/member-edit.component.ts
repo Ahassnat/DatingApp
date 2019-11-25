@@ -39,5 +39,7 @@ unloadNotification($event: any) {
     });
     console.log(this.user);
   }
-
+  updateMainPhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
+  }
 }
