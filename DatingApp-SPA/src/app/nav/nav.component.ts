@@ -41,6 +41,9 @@ model: any = {};
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
     this.toastr.info('LogOut', '');
     // this.alertify.message(':ALRET: Logout');
     this.router.navigate(['/home']);

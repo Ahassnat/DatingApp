@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import { from } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../_models/user';
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class AuthService {
 baseUrl = environment.apiUrl + 'auth/';
 jwtHelper = new JwtHelperService();
 decodedToken: any;
+currentUser: User;
 
 constructor( private http: HttpClient) { }
 
@@ -23,7 +25,9 @@ return  this.http.post(this.baseUrl + 'login' , model)
                const user = response;
                if (user) {
                  localStorage.setItem('token', user.token);
+                 localStorage.setItem('user', JSON.stringify(user.user));
                  this.decodedToken = this.jwtHelper.decodeToken(user.token); // this line just make the token readable
+                 this.decodedToken = user.user;
                  console.log(this.decodedToken);
                }
              })
