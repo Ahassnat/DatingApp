@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class MemberEditComponent implements OnInit {
 @ViewChild('editForm') editForm: NgForm;
 user: User;
+photoUrl: string;
 // its for to show message when we close the Browser page without making save to our Changes after Editing
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
@@ -28,6 +29,7 @@ unloadNotification($event: any) {
     this.router.data.subscribe(data => {
       this.user = data['user'];
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser() {
