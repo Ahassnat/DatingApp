@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/_services/auth.service';
 import { UserService } from 'src/app/_services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-photo-editor',
@@ -19,7 +20,8 @@ export class PhotoEditorComponent implements OnInit {
   baseUrl = environment.apiUrl;
   currentMain: Photo;
 
-  constructor(private authService: AuthService, private userService: UserService, private toastrService: ToastrService) { }
+  constructor(private authService: AuthService, private userService: UserService,
+     private toastrService: ToastrService, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.initializeUploder();
@@ -70,5 +72,16 @@ export class PhotoEditorComponent implements OnInit {
   }, error => {
     this.toastrService.error(' Error', 'Photo Setting ERROR');
   });
+ }
+
+ deletePhoto(id: number) {
+  //  this.alertify.confirm('Are You Sure you want to Delete this photo?', () => {
+    this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
+      this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
+      this.toastrService.success('Photo Has been Deleted', 'DELETED');
+    }, error => {
+      this.toastrService.error('Faild to Delete The Photo', 'FAIELD MASSAGE');
+    });
+  //  });
  }
 }
