@@ -23,7 +23,11 @@ registerForm: FormGroup;
       username: new FormControl('home', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
       confirmPassword: new FormControl('', Validators.required)
-    });
+    }, this.passwordMatchValidator);
+  }
+
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('password').value === g.get('confirmPasswor').value ? null : {'missMatch': true};
   }
 
   register() {
