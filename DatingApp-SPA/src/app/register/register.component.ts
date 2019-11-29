@@ -27,7 +27,7 @@ registerForm: FormGroup;
   }
 
   passwordMatchValidator(g: FormGroup) {
-    return g.get('password').value === g.get('confirmPasswor').value ? null : {'missMatch': true};
+    return g.get('password').value === g.get('confirmPassword').value ? null : {'missMatch': true};
   }
 
   register() {
