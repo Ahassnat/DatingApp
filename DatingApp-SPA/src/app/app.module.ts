@@ -5,11 +5,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+
 
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
@@ -61,6 +62,7 @@ export function tokenGetter() {
       CommonModule,
       FileUploadModule,
       ReactiveFormsModule,
+      BsDatepickerModule.forRoot(),
       BrowserAnimationsModule, // required animations module
       ToastrModule.forRoot({
          positionClass: 'toast-bottom-right'

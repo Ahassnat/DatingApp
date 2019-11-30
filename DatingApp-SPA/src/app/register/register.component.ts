@@ -3,6 +3,7 @@ import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap';
 
 
 
@@ -15,11 +16,15 @@ export class RegisterComponent implements OnInit {
 @Output() cancelRegister = new EventEmitter();
 model: any = {};
 registerForm: FormGroup;
+bsConfig: Partial<BsDatepickerConfig>; // type Partial mean that all proparties of <BsDatepickerConfig> are optinal
 
   constructor( private authService: AuthService, private alertify: AlertifyService,
      private toastr: ToastrService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.bsConfig = {
+      containerClass: 'theme-red'
+    },
     this.createRegisterForm();
   }
 
