@@ -4,6 +4,8 @@ import { AlertifyService } from '../_services/alertify.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap';
+import { User } from '../_models/user';
+import { Router } from '@angular/router';
 
 
 
@@ -14,12 +16,12 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap';
 })
 export class RegisterComponent implements OnInit {
 @Output() cancelRegister = new EventEmitter();
-model: any = {};
+user: User;
 registerForm: FormGroup;
 bsConfig: Partial<BsDatepickerConfig>; // type Partial mean that all proparties of <BsDatepickerConfig> are optinal
 
   constructor( private authService: AuthService, private alertify: AlertifyService,
-     private toastr: ToastrService, private fb: FormBuilder) { }
+     private toastr: ToastrService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.bsConfig = {
@@ -46,18 +48,19 @@ bsConfig: Partial<BsDatepickerConfig>; // type Partial mean that all proparties 
   }
 
   register() {
-    // this.authService.register(this.model).subscribe(() => {
-    // this.toastr.success('ALERT: Registeration Sucsseffly', 'success');
-    //   // this.alertify.success(':ALERT: Registeration Sucsseffly');
-    //   // console.log('Registeration Sucsseffly');
-    // }, error => {
-    //   this.toastr.error('password or user Name have problem', 'Error');
-    //   // this.alertify.error(error);
-    //   // console.log(error);
-    // }
-    // );
-
-    console.log(this.registerForm.value);
+    if (this.registerForm.valid) {
+      this.user = Object.assign({}, this.registerForm.value); // we use this Object function to extract data from registerForm
+      this.authService.register(this.user).subscribe(() => {
+        this.toastr.success('ALERT: Registeration Sucsseffly', 'success');
+      }, error => {
+        this.toastr.error('password or user Name have problem', 'Error');
+      }, () => {
+        this.authService.login(this.user).subscribe(() => {
+          this.router.navigate(['/members']);
+        });
+      });
+    }
+    // console.log(this.registerForm.value);
   }
 
   cancel() {
