@@ -33,7 +33,7 @@ return  this.http.post(this.baseUrl + 'login' , model)
                  localStorage.setItem('token', user.token);
                  localStorage.setItem('user', JSON.stringify(user.user));
                  this.decodedToken = this.jwtHelper.decodeToken(user.token); // this line just make the token readable
-                 this.decodedToken = user.user;
+                 this.currentUser = user.user;
                  this.changeMemberPhoto(this.currentUser.photoUrl);
                  // console.log(this.decodedToken);
                }
