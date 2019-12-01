@@ -48,6 +48,7 @@ namespace DatingApp.API
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddTransient<Seed>();
+            services.AddScoped<LogUserActivity>();
             services.AddScoped<IAuthRepository,AuthRepository>();//للتعامل مع المستودع 
             services.AddScoped<IDatingRepository,DatingRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
