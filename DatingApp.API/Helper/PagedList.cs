@@ -16,8 +16,8 @@ namespace DatingApp.API.Helper
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
             TotalCount = count;
+            PageSize = pageSize;
             CurrentPage = pageNumber;
-            PageSize = PageSize;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             this.AddRange(items); //AddRange its function of List return An object that acts as a read-only wrapper around the current List 
         }
