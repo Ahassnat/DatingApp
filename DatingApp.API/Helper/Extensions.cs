@@ -18,10 +18,11 @@ namespace DatingApp.API.Helper
              response.Headers.Add("Access-Control-Allow-Origin","*");
          }
 
+         // will send this data by header response to clinet side 
          public static void AddPagination(this HttpResponse response,
-                                         int currentPage, int itemPerPage, int totalItems, int totalPages)
+                     int currentPage, int itemPerPage, int totalItems, int totalPages)
          {
-             var paginationHeader = new PaginationHeader(currentPage,itemPerPage,totalItems,totalPages);
+             var paginationHeader = new PaginationHeader(currentPage,itemPerPage,totalItems,totalPages); // Constractor from class PaginationHeader 
              response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader));
              response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
          }
