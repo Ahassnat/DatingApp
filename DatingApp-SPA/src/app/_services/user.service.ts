@@ -28,11 +28,11 @@ constructor(private http: HttpClient) { }
 getUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
 
-  let params = new HttpParams();
+  let params = new HttpParams(); // Http header params Data
 
   if (page != null && itemsPerPage != null) {
     params = params.append('pageNumber', page); // this code to add after the url ?pageNumber=
-    params = params.append('pageSize', itemsPerPage); // this code to add after the url ?pageNumber=&pageSize
+    params = params.append('pageSize', itemsPerPage); // this code to add after the url ?pageNumber=8&pageSize=35
   }
 
   return this.http.get<User[]>(this.baseUrl + 'users', {observe: 'response', params})
