@@ -29,6 +29,17 @@ namespace DatingApp.API.Controllers
                                  //[FromQuery] because using Query string  in function CreateAsync in the Dating Reopsitory
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
+            // Found the login user
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo  = await _repo.GetUser(currentUserId);
+
+            //Add Filtter Criteria
+            userParams.UserId = currentUserId;
+            if(string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male" ;
+            } 
+
             var users = await _repo.GetUsers(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
