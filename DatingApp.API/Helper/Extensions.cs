@@ -21,9 +21,9 @@ namespace DatingApp.API.Helper
 
          // will send this data by header response to clinet side 
          public static void AddPagination(this HttpResponse response,
-                     int currentPage, int itemPerPage, int totalItems, int totalPages)
+                     int currentPage, int itemsPerPage, int totalItems, int totalPages)
          {
-             var paginationHeader = new PaginationHeader(currentPage,itemPerPage,totalItems,totalPages); // Constractor from class PaginationHeader 
+             var paginationHeader = new PaginationHeader(currentPage,itemsPerPage,totalItems,totalPages); // Constractor from class PaginationHeader 
              
              // camelCaseFormatter this function is simple its just to change the format for parameter 
              // from (title formal) => like this TitleFormat to (camel Format) =>  like this camelFormat 
