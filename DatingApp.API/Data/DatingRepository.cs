@@ -56,6 +56,18 @@ namespace DatingApp.API.Data
             users = users.Where(u => u.Id != userParams.UserId); // check the logedin user and retuen all the ather users 
             users = users.Where(u => u.Gender == userParams.Gender); // fillter on Gender proparity
 
+            // get list of Id's for the useres how like and the users being liked
+            if(userParams.Likers)
+            {
+                var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(u => userLikers.Contains(u.Id));
+            }
+            if(userParams.Likees)
+            {
+                var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(u => userLikees.Contains(u.Id));
+            }
+
             if (userParams.minAge != 18 || userParams.maxAge != 99)
             {
                 var minDob = DateTime.Today.AddYears(-userParams.maxAge - 1);
@@ -77,6 +89,23 @@ namespace DatingApp.API.Data
             }
           
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
+        }
+
+        private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)
+        {
+            var user = await _context.Users
+                            .Include(x =>x.Likers)
+                            .Include(x =>x.Likees)
+                            .FirstOrDefaultAsync(u => u.Id == id);
+                    
+            if(likers)
+            {
+                return user.Likers.Where(x=>x.LikeeId == id).Select(x=>x.LikerId); // use Select(x=>x.LikerId) to bring list of liker  
+            }
+            else
+            {
+                return user.Likees.Where(x => x.LikerId == id).Select(x => x.LikeeId);
+            }
         }
 
         public async Task<bool> SaveAll()
