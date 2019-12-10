@@ -91,7 +91,7 @@ namespace DatingApp.API
             }
 
             //app.UseHttpsRedirection();
-            // seeder.SeedUsers(); function used for one time to update data base then we ignore it , if we didnt ignorant the function its will repeate ever time we luncj our project and add the same data again and again in our DB
+            //seeder.SeedUsers(); // function used for one time to update data base then we ignore it , if we didnt ignorant the function its will repeate ever time we luncj our project and add the same data again and again in our DB
             app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

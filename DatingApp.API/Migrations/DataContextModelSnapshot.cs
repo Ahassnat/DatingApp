@@ -40,7 +40,7 @@ namespace DatingApp.API.Migrations
 
                     b.Property<bool>("IsRead");
 
-                    b.Property<DateTime>("MessageRead");
+                    b.Property<DateTime>("MessageSent");
 
                     b.Property<bool>("RecipientDeleted");
 
