@@ -32,7 +32,9 @@ namespace DatingApp.API.Helper
             CreateMap<UserForRegisterDto,User>(); // for registration Form After Expanding the form
            
             CreateMap<MessageForCreationDto, Message>().ReverseMap(); // to Create a new message
-
+            CreateMap<Message, MessageToReturnDto>()
+            .ForMember (m => m.SenderPhotoUrl, opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
+            .ForMember (m => m.RecipientPhotoUrl, opt => opt.MapFrom(u => u.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
         }
     }
 }
