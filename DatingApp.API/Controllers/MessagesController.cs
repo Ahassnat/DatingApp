@@ -98,5 +98,27 @@ namespace DatingApp.API.Controllers
             
             throw new Exception("The Message Failed to Save");
         }
+
+        [HttpPost("{id}")] // we use HttpPost , not HttpDelete becuse we want to delete message from one side the recipient side or sender side but message remain in the sender outbox
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var messageFromRepo = await _repo.GetMessage(id);
+
+            if(messageFromRepo.SenderId == userId)
+                messageFromRepo.SenderDeleted = true;
+            if(messageFromRepo.RecipientId == userId)
+                messageFromRepo.RecipientDeleted = true;
+
+            if(messageFromRepo.SenderDeleted && messageFromRepo.RecipientDeleted)
+                _repo.Delete(messageFromRepo);
+            
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception("Error Deleting Message");
+        }
     }
 }
