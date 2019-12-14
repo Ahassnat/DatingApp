@@ -6,6 +6,7 @@ import { User } from '../_models/user';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
+import { post } from 'selenium-webdriver/http';
 
 
 // httpOption is somulation to the postman tester take the same value of the header of postman
@@ -106,5 +107,9 @@ getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
 
 getMessageThread(id: number, recipientId: number) {
   return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
+}
+
+sendMessage(id: number, message: Message) {
+  return this.http.post(this.baseUrl + 'users/' + id + '/messages/', message);
 }
 }
